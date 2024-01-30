@@ -1,0 +1,8 @@
+{
+    "monster":"godzilla,mothra,mecha_godzilla",
+    "size_width": "48",
+    "size_height":"42",
+    "run_random":"true",
+    "start_coordinate_x":"600",
+    "start_coordinate_y":"440"
+}

@@ -1,0 +1,29 @@
+{
+    "algImageName" :"__registry_server__/geotransform/godzilla:latest",
+    "containerName":"kaiju",
+    "containerReference":"godzilla",
+    "mountedDirectory": "/app/data",
+    "submissionDirectory" : "in",
+    "resultsDirectory" : "out",
+    "logsDirectory":"logs",
+    "modelPython":"./main.py",
+	"registryServer": "__registry_server__",
+	"registryUserName": "__registry_username__",
+	"registryPassword": "__registry_password__",
+    "vaultUri":"__vault_uri__",
+	"cpu":1,
+	"memory":8,
+	"gpu":"",
+    "validations":[
+        {
+            "validator":"FileExtensionValidator",
+            "expected":".png",
+            "value":"*.*"
+        },
+        {
+            "validator":"FileCountValidator",
+            "expected":"1",
+            "value":""
+        }
+    ]
+}
