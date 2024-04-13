@@ -1,0 +1,10 @@
+FROM kaiju/kaiju-base:0.0.1
+USER root
+RUN mkdir -p /data
+RUN mkdir -p /data/converted
+RUN mkdir -p /data/injected
+
+RUN mkdir -p /src
+COPY ./src /src
+
+CMD ["python", "./src/inject_kaiju.py"]
