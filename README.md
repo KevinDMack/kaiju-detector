@@ -8,7 +8,7 @@ The goal of this application is to show the ability to use geo-spatial imagery i
 # Pre-requisites:
 The following are required to run this application:
 - vscode
-- devcontainer extension
+- wsl 
 
 # Running the application.
 The following steps will allow you to run this application code:
@@ -54,6 +54,11 @@ Generated config file for bounding box at ./data/config...
 
 Now, this has already generated a file the application will use to run it through our Kaiju Injector / Detector.  That file can be found at [./data/config/bbox.json](./data/config/bbox.json).
 
+If you want to update the file at [./config/bbox.json] you can migrate it over to the data directory with this script:
+```bash
+bash ./scripts/copy_config.sh
+```
+
 ## Build the container images:
 Much like applications on orbit, or even on earth, this application makes use of docker containers for executing the different pieces.  To build the docker images, please run the following from your terminal:
 
@@ -74,7 +79,7 @@ This will show you all running docker containers, and you will be able to see yo
 
 Run the following command which will startup the container to get imagery.
 ```bash
-docker run --rm -d -v /workspaces/kaiju-detector/test:/data kaiju/kaiju-get:0.0.1
+docker run --rm -d -v /var/kaiju_data:/data kaiju/kaiju-get:0.0.1
 ```
 
 To see the logs of the container, run the following, in a different terminal:

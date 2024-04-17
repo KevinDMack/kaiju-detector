@@ -1,7 +1,7 @@
 {
     "monster":"godzilla,mothra,voltron",
-    "size_width": "48",
-    "size_height":"42",
+    "size_width": "28",
+    "size_height":"22",
     "run_random":"true",
     "start_coordinate_x":"600",
     "start_coordinate_y":"440"
