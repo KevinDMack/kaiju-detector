@@ -42,7 +42,7 @@ def get_geo_imagery(bbox, output_dir):
     print(f"Found {len(items)} items")
 
     # Create the output directory if it doesn't exist
-    os.makedirs("${output_dir}", exist_ok=True)
+    os.makedirs("{output_dir}", exist_ok=True)
 
     # Download the imagery associated with each item
     for item in items:
@@ -66,6 +66,7 @@ def main():
         
         bbox = [bbox_dict["min_long"], bbox_dict["min_lat"], bbox_dict["max_long"], bbox_dict["max_lat"]]
         output_dir = bbox_dict["output_dir"]
+        print(f"output_dir: {output_dir}")
         items = get_geo_imagery(bbox, output_dir)
     except Exception as e:
         print(f"error reading environment variables: {e}")
