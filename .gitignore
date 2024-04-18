@@ -160,3 +160,4 @@ cython_debug/
 #.idea/
 data/*
 test-data/*
+src/config/api_key.json

@@ -7,4 +7,6 @@ RUN mkdir -p /data/injected
 RUN mkdir -p /src
 COPY ./src /src
 
+RUN pip3 install --user -r ./src/requirements.txt
+
 CMD ["python", "./src/inject_kaiju.py"]

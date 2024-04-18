@@ -18,13 +18,7 @@ import matplotlib.pyplot as plt
 
 from datetime import datetime, timedelta
 
-# Default values for environment variables
-DEFAULT_INPUT_DIR = "data/converted"
-DEFAULT_OUTPUT_DIR = "data/injected"
-DEFAULT_CONFIG = "src/config/config.json"
-BBOX_CONFIG_PATH = "data/config/bbox.json"
-
-def get_geo_imagery(bbox):
+def get_geo_imagery(bbox, output_dir):
     # Create a STAC client
     stac = pystac_client.Client.open("https://planetarycomputer.microsoft.com/api/stac/v1")
 
@@ -48,7 +42,7 @@ def get_geo_imagery(bbox):
     print(f"Found {len(items)} items")
 
     # Create the output directory if it doesn't exist
-    os.makedirs("./data/in", exist_ok=True)
+    os.makedirs("${output_dir}", exist_ok=True)
 
     # Download the imagery associated with each item
     for item in items:
@@ -58,7 +52,7 @@ def get_geo_imagery(bbox):
 
         # Download the asset and save it to the output directory
         response = requests.get(asset_url)
-        with open(f"./data/in/{item.id}.tif", "wb") as f:
+        with open(f"${output_dir}/{item.id}.tif", "wb") as f:
             f.write(response.content)
 
         print(f"Downloaded asset for item {item.id}")
@@ -66,17 +60,13 @@ def get_geo_imagery(bbox):
     return items
 
 def main():
-    input_dir = os.getenv("APP_INPUT_DIR", DEFAULT_INPUT_DIR)
-    output_dir = os.getenv("APP_OUTPUT_DIR", DEFAULT_OUTPUT_DIR)
-    config = os.getenv("APP_CONFIG", DEFAULT_CONFIG)
-
     try:
         with open('./data/config/bbox.json', 'r') as f:
             bbox_dict = json.load(f)
         
         bbox = [bbox_dict["min_long"], bbox_dict["min_lat"], bbox_dict["max_long"], bbox_dict["max_lat"]]
-        # bbox = [-76.9321, 40.2426, -76.7936, 40.3363] 
-        items = get_geo_imagery(bbox)
+        output_dir = bbox_dict["output_dir"]
+        items = get_geo_imagery(bbox, output_dir)
     except Exception as e:
         print(f"error reading environment variables: {e}")
 

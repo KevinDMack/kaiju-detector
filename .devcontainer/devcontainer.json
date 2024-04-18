@@ -12,7 +12,7 @@
 	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "apt-get update && apt-get install -y docker.io jq bc; pip3 install --user -r ./src/requirements.txt",
+	"postCreateCommand": "apt-get update && apt-get install -y docker.io jq bc imagemagick; pip3 install --user -r ./src/requirements.txt",
 
 	// Configure tool-specific properties.
 	// "customizations": {},
