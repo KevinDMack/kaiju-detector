@@ -56,6 +56,7 @@ echo "{
   \"min_lat\": \"$min_lat\",
   \"min_long\": \"$min_lon\",
   \"max_lat\": \"$max_lat\",
-  \"max_long\": \"$max_lon\"
+  \"max_long\": \"$max_lon\",
+  \"output_dir\": \"./data/in\"
 }" > $config_dir_path/bbox.json
 echo "Generated config file for bounding box at $config_dir_path..."

@@ -2,13 +2,15 @@
 The goal of this application is to show the ability to use geo-spatial imagery in a fun way from the Micrsoft Planetary Computer.  
 
 # What does this application do?
+The goal of this application is to identify and help Voltron to find the elusive kaiju of Godzilla and Mothra.  And to leverage and show how to use Microsoft's Planetary Computer and Custom Vision Service.  
 
 # Why does this matter?
+This is just a sample of how AI can be used to see things in Geospatial imagery.  This is meant for educational use only.  
 
 # Pre-requisites:
 The following are required to run this application:
-- vscode
-- wsl 
+- vscode - [download vscode](https://code.visualstudio.com/download)
+- wsl - [install wsl](https://learn.microsoft.com/en-us/windows/wsl/install)
 
 # Technologies being used:
 The following are the key technologies being used by the kaiju detector:
@@ -75,24 +77,12 @@ bash ./scripts/copy_config.sh
 ```
 
 ## Pulling Down imagery: - TODO - Remove docker
-To pull down the imagery, you will run the following script, which will deploy the docker container to download the imagery.  
+To pull down the imagery, you will run the following python file:
 
-If you would like to watch the container execute, you can do so by running the following command, in a separate window:
 ```bash
-watch -n 1 docker container ls
-```
-This will show you all running docker containers, and you will be able to see your container.  
-
-Run the following command which will startup the container to get imagery.
-```bash
-docker run --rm -d -v /var/kaiju_data:/data kaiju/kaiju-get:0.0.1
+python3 ./src/get_imagery.py 
 ```
 
-To see the logs of the container, run the following, in a different terminal:
-```bash
-container_id=$(docker ps -aqf "ancestor=kaiju/kaiju-get:0.0.1")
-watch -n 1 docker logs $container_id
-```
 When completed, you will see the following in the data directory:
 ![alt text](./images/data_retreived.png)
 ![alt text](./images/geotiff.png)
