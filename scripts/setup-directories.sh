@@ -1,3 +1,4 @@
+#!/bin/bash
 echo "Creating directories..."
 sudo mkdir -p ./kaiju_data
 sudo mkdir -p ./kaiju_data/in

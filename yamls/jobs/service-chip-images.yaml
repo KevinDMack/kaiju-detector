@@ -1,0 +1,23 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: service-chip-images
+spec:
+  template:
+    spec:
+      containers:
+        - name: service-chip-images
+          image: kaiju/service-chip-images:latest
+          volumeMounts:
+            - name: in-volume
+              mountPath: /kaiju_data/in
+            - name: out-volume
+              mountPath: /kaiju_data/out
+      volumes:
+        - name: in-volume
+          hostPath:
+            path: ${KAIJU_BASE_PATH}/kaiju_data/resized
+        - name: out-volume
+          hostPath:
+            path: ${KAIJU_BASE_PATH}/kaiju_data/chipped
+      restartPolicy: Never

@@ -22,7 +22,39 @@
         {
             "label": "Build all images",
             "type": "shell",
-            "command": "./scripts/build_all_images.sh",
+            "command": "./scripts/build-all-images.sh",
+            "args": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "close": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Install k3s",
+            "type": "shell",
+            "command": "./scripts/install-k3s.sh",
+            "args": [],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared",
+                "close": false
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Uninstall k3s",
+            "type": "shell",
+            "command": "./scripts/uninistall-k3s.sh",
             "args": [],
             "group": {
                 "kind": "build",
