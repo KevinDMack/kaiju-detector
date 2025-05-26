@@ -26,7 +26,7 @@ def get_geo_imagery(bbox, output_dir):
     collection_id = "naip"
 
     # Calculate the date one year ago from today
-    one_year_ago = datetime.now() - timedelta(days=730)
+    one_year_ago = datetime.now() - timedelta(days=1825)
     one_year_ago_str = one_year_ago.strftime("%Y-%m-%d")
 
     # Search for items in the collection within the bounding box from the past year
@@ -52,7 +52,9 @@ def get_geo_imagery(bbox, output_dir):
 
         # Download the asset and save it to the output directory
         response = requests.get(asset_url)
-        with open(f"${output_dir}/{item.id}.tif", "wb") as f:
+        print(f"Response status code: {response.status_code}")
+        print(f"{output_dir}/{item.id}.tif")
+        with open(f"{output_dir}/{item.id}.tif", "wb") as f:
             f.write(response.content)
 
         print(f"Downloaded asset for item {item.id}")
@@ -61,7 +63,7 @@ def get_geo_imagery(bbox, output_dir):
 
 def main():
     try:
-        with open('./data/config/bbox.json', 'r') as f:
+        with open('./kaiju_data/config/bbox.json', 'r') as f:
             bbox_dict = json.load(f)
         
         bbox = [bbox_dict["min_long"], bbox_dict["min_lat"], bbox_dict["max_long"], bbox_dict["max_lat"]]
