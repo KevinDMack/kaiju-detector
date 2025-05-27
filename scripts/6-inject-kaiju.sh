@@ -1,0 +1,1 @@
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/chipped:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/injected:/kaiju_data/out kaiju/service-inject-kaiju:latest
