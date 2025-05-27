@@ -150,3 +150,114 @@ And then run the kaiju injection:
 ```python
 python3 ./src/inject_kaiju.py 
 ```
+
+# Building docker containers
+
+This repo supports building the various components into docker containers.
+
+## kaiju/kaiju-base:latest
+
+This builds the base image used for all containers:
+
+```
+docker build -t kaiju/service-base-kaiju:latest -f ./Dockerfiles/Dockerfile.base .
+```
+
+## kaiju/service-get-bounding-box:latest
+
+This builds the container image will retrieve a latitude and longitude bounding box for an address.  
+
+```
+docker build --build-arg SERVICE_NAME=service-get-bounding-box -t kaiju/service-get-bounding-box:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/config:/kaiju_data/config kaiju/service-get-bounding-box:latest
+```
+     
+
+## kaiju/service-get-satellite-imagery:latest
+
+This builds the container image for getting satellite imagery, using this command:
+
+```
+docker build --build-arg SERVICE_NAME=service-get-satellite-imagery -t kaiju/service-get-satellite-imagery:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/in:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/config:/kaiju_data/config kaiju/service-get-satellite-imagery:latest
+```
+
+## kaiju/service-convert-images:latest
+
+This builds the container image for converting images to png, using this command:
+
+```
+docker build --build-arg SERVICE_NAME=service-convert-images -t kaiju/service-convert-images:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/in:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/converted:/kaiju_data/out kaiju/service-convert-images:latest
+```
+
+## kaiju/service-resize-image:latest
+
+This image is used to resize images to make them work with customer vision.
+
+```
+docker build --build-arg SERVICE_NAME=service-resize-images -t kaiju/service-resize-images:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/converted:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/resized:/kaiju_data/out kaiju/service-resize-images:latest
+```
+
+## kaiju/service-chip-image:latest
+
+This image is used to chip a larger image into smaller images:
+
+```
+docker build --build-arg SERVICE_NAME=service-chip-images -t kaiju/service-chip-images:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/resized:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/chipped:/kaiju_data/out kaiju/service-chip-images:latest
+```
+
+## kaiju/service-inject-kaiju:latest
+
+This command will build the image for injecting kaiju into imagery.  
+
+```
+docker build --build-arg SERVICE_NAME=service-inject-kaiju -t kaiju/service-inject-kaiju:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/chipped:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/injected:/kaiju_data/out kaiju/service-inject-kaiju:latest
+```
+
+## kaiju/service-check-image:latest
+
+This command will build the image for injecting kaiju into imagery.  
+
+```
+docker build --build-arg SERVICE_NAME=service-check-image -t kaiju/service-check-image:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/config:/kaiju_data/config -v /home/kemack/github-projects/kaiju-detector/kaiju_data/real-injected:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/detection-results:/kaiju_data/out kaiju/service-check-image:latest
+```

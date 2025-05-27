@@ -19,14 +19,9 @@ import matplotlib.pyplot as plt
 
 from datetime import datetime, timedelta
 
-# Default values for environment variables
-# Running for training data
-#DEFAULT_INPUT_DIR = f"./data/chipped"
-#DEFAULT_OUTPUT_DIR = f"./data/injected/"
+DEFAULT_INPUT_DIR = f"./kaiju_data/in"
+DEFAULT_OUTPUT_DIR = f"./kaiju_data/out/"
 
-# Running on final output
-DEFAULT_INPUT_DIR = f"./data/real-resized"
-DEFAULT_OUTPUT_DIR = f"./data/real-injected/"
 DEFAULT_CONFIG = "src/config/config.json"
 
 def inject_godzilla(input_path : str, output_path : str, config_path : str):

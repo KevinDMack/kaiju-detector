@@ -1,0 +1,19 @@
+FROM kaiju/service-base-kaiju
+USER root
+
+# Define an argument for the service name
+ARG SERVICE_NAME=kaiju-service
+
+# Use the argument to create directories and copy files
+RUN mkdir -p /kaiju_data
+RUN mkdir -p /kaiju_data/in
+RUN mkdir -p /kaiju_data/out 
+RUN mkdir -p /kaiju_data/config
+COPY ./kaiju_data/config /kaiju_data/config
+
+RUN mkdir /src
+COPY ./${SERVICE_NAME} /src
+
+RUN if [ -f /src/requirements.txt ]; then pip3 install --user -r /src/requirements.txt; fi
+
+CMD ["python", "/src/main.py"]

@@ -1,0 +1,1 @@
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/converted:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/resized:/kaiju_data/out kaiju/service-resize-images:latest

@@ -1,0 +1,1 @@
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/config:/kaiju_data/config kaiju/service-get-bounding-box:latest
