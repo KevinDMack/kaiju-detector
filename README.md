@@ -247,3 +247,17 @@ If you wish to test this container, run the following:
 ```
 docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/chipped:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/injected:/kaiju_data/out kaiju/service-inject-kaiju:latest
 ```
+
+## kaiju/service-check-image:latest
+
+This command will build the image for injecting kaiju into imagery.  
+
+```
+docker build --build-arg SERVICE_NAME=service-check-image -t kaiju/service-check-image:latest -f ./Dockerfiles/Dockerfile.service .
+```
+
+If you wish to test this container, run the following:
+
+```
+docker run -v /home/kemack/github-projects/kaiju-detector/kaiju_data/config:/kaiju_data/config -v /home/kemack/github-projects/kaiju-detector/kaiju_data/real-injected:/kaiju_data/in -v /home/kemack/github-projects/kaiju-detector/kaiju_data/detection-results:/kaiju_data/out kaiju/service-check-image:latest
+```

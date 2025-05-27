@@ -161,3 +161,4 @@ cython_debug/
 kaiju_data/*
 src/config/api_key.json
 
+service-check-image/config.json
